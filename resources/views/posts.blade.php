@@ -1,58 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Posts</title>
-    <!-- Font Awesome -->
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-        rel="stylesheet"
-    />
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        rel="stylesheet"
-    />
-    <!-- MDB -->
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"
-        rel="stylesheet"
-    />
-</head>
+@extends('layouts.template')
 
 
-<body style="background: #303030">
-    <div class="container-fluid text-center">
-        <a href="/" class='btn btn-primary' role='button'>Home</a>
-        <a href="/info" class='btn btn-primary' role='button'>Info</a>
-    </div>
-    <div class="container" id="mainContainer">
-    </div>
-</body>
+@section('title', 'All Posts')
 
-<!-- AUDIO script -->
-<script>
-    window.onload = function () {
-        if (localStorage.getItem("hasCodeRunBefore") === null) {
-            var audio = new Audio('static/audio/bell.mp3');
-            audio.play();
-            localStorage.setItem("hasCodeRunBefore", true);
-        }
-    }
-</script>
 
-<!-- FETCH script -->
-<script 
-    type="text/javascript"
-    src="static/js/mainFetch.js"
-></script>
+@php
+    $posts = json_decode(file_get_contents("https://jsonplaceholder.typicode.com/posts"), true);
+@endphp
 
-<!-- BOOTSTRAP SCRIPT -->
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
-></script>
+@section('container')
+    @foreach($posts as $post)
+        <div class="card m-2">
+            <div class="card-body">
+                <h5 class="card-title">{{ $post['title'] }}</h5>
+                <p class="card-text">
+                    {{ $post['body'] }}
+                </p>
+            <a href="/post/{{ $post['id'] }}" class="btn btn-primary">More</a>
+            </div>
+        </div>
+    @endforeach
+@endsection
 
-</html>
+
+@section('scripts')
+    <script src='/js/audio.js'>
+    </script>
+@endsection

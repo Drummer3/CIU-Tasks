@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('posts');
 });
 
-Route::get('/post/{id}', function ($id) {
+Route::get('/post/{id}', function ($id) {    
     return view('postPage', ['id' => $id]);
 });
 

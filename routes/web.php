@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('posts');
-});
+Route::get('/', [PostController::class, 'allPosts']);
 
-Route::get('/post/{id}', function ($id) {    
-    return view('postPage', ['id' => $id]);
-});
+Route::get('/post/{id}', [PostController::class, 'individualPost']);
 
 Route::get('/info', function(){
     return view('info');

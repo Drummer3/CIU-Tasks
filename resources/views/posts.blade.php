@@ -4,10 +4,6 @@
 @section('title', 'All Posts')
 
 
-@php
-    $posts = json_decode(file_get_contents("https://jsonplaceholder.typicode.com/posts"), true);
-@endphp
-
 @section('container')
     @foreach($posts as $post)
         <div class="card m-2">

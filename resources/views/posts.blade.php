@@ -12,7 +12,7 @@
                 <p class="card-text">
                     {{ $post['body'] }}
                 </p>
-            <a href="/post/{{ $post['id'] }}" class="btn btn-primary">More</a>
+                <a href="/post/{{ $post['id'] }}" class="btn btn-primary">More</a>
             </div>
         </div>
     @endforeach
